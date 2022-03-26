@@ -6,7 +6,7 @@
 // p5.js reference: https://p5js.org/reference/
 
 // Database (CHANGE THESE!)
-const GROUP_NUMBER   = 0;      // Add your group number here as an integer (e.g., 2, 3)
+const GROUP_NUMBER   = 61;      // Add your group number here as an integer (e.g., 2, 3)
 const BAKE_OFF_DAY   = false;  // Set to 'true' before sharing during the bake-off day
 
 // Target and grid properties (DO NOT CHANGE!)
@@ -51,6 +51,7 @@ function setup()
   
   textFont("Arial", 18);     // font size for the majority of the text
   drawUserIDScreen();        // draws the user start-up screen (student ID and display size)
+  
 }
 
 // Runs every frame and redraws the screen
@@ -270,7 +271,7 @@ function windowResized()
   draw_targets = true;
 }
 
-// Responsible for drawing the input area
+// Responsible for drawing the input area -- Retângulo onde temos o nosso rato
 function drawInputArea()
 {
   noFill();
