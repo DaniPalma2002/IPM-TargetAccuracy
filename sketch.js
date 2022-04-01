@@ -195,6 +195,7 @@ function drawTarget(i)
   { 
     // Highlights the target the user should be trying to select
     // with a white border
+    fill(color(0,100,0));
     stroke(color(0,220,0));
     strokeWeight(10);
     
@@ -203,19 +204,26 @@ function drawTarget(i)
     //
   }
 
+  
   //! next target !!!
+  
   else if (trials[current_trial + 1] === i)
   {
+    fill(color(100,0,0));
     stroke(color(0,0,220));
     strokeWeight(5);
   }
+  
 
   // Does not draw a border if this is not the target the user
   // should be trying to select
-  else noStroke();          
+  else {
+    noStroke();
+    fill(color(155,155,155));
+  }          
 
   // Draws the target
-  fill(color(155,155,155));                 
+  //fill(color(155,155,155));                 
   circle(target.x, target.y, target.w);
 }
 
