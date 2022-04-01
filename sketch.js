@@ -2,7 +2,7 @@
 // IPM 2021-22, Período 3
 // Entrega: até dia 22 de Abril às 23h59 através do Fenix
 // Bake-off: durante os laboratórios da semana de 18 de Abril
-
+//ola
 // p5.js reference: https://p5js.org/reference/
 
 // Database (CHANGE THESE!)
@@ -213,7 +213,7 @@ function drawTarget(i)
     stroke(color(0,0,220));
     strokeWeight(5);
   }
-  
+
 
   // Does not draw a border if this is not the target the user
   // should be trying to select
