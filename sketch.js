@@ -206,7 +206,7 @@ function drawTarget(i)
   //! next target !!!
   else if (trials[current_trial + 1] === i)
   {
-    stroke(color(110,0,0));
+    stroke(color(0,0,220));
     strokeWeight(5);
   }
 
