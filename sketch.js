@@ -122,7 +122,8 @@ function printAndSavePerformance()
         attempt_duration:   test_time,
         time_per_target:    time_per_target,
         target_w_penalty:   target_w_penalty,
-        fitts_IDs:          fitts_IDs
+        fitts_IDs:          fitts_IDs,
+        //version:            "1.1"
   }
   
   // Send data to DB (DO NOT CHANGE!)
