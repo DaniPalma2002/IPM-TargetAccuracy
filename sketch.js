@@ -123,7 +123,7 @@ function printAndSavePerformance()
         target_w_penalty:   target_w_penalty,
         fitts_IDs:          fitts_IDs,
         // !! REMOVE ON BAKEOFF DAY !!
-        version:            "1.1"
+        version:            "1.2"
   }
   
   // Send data to DB (DO NOT CHANGE!)
@@ -189,16 +189,37 @@ function mousePressed()
 function drawTarget(i)
 {
   // Get the location and size for target (i)
-  let target = getTargetBounds(i);             
+  let target = getTargetBounds(i);
+  
+  // next target is the same as the current
+  if (trials[current_trial] === i && trials[current_trial + 1] === i) {
+    
+    
+
+    fill(color(0,200,0));
+    stroke(color(0,220,0));
+    strokeWeight(10);
+    circle(target.x, target.y, target.w);
+
+    /*
+    fill(220,220,220);
+    textSize(80);
+    textAlign(CENTER);
+    text('2', target.x, target.y);
+    textSize(18);
+    */
+  }
 
   // Check whether this target is the target the user should be trying to select
-  if (trials[current_trial] === i) 
+  else if (trials[current_trial] === i) 
   { 
     // Highlights the target the user should be trying to select
     // with a white border
-    fill(color(0,100,0));
+    fill(color(0,200,0));
     stroke(color(0,220,0));
     strokeWeight(10);
+
+    circle(target.x, target.y, target.w);
     
     // Remember you are allowed to access targets (i-1) and (i+1)
     // if this is the target the user should be trying to select
@@ -206,14 +227,16 @@ function drawTarget(i)
   }
 
   
-  //! next target !!!
   
-  else if (trials[current_trial + 1] === i)
-  {
+  //! next target !!!
+  else if (trials[current_trial + 1] === i) {
     fill(color(100,0,0));
     stroke(color(120,0,0));
     strokeWeight(5);
+    circle(target.x, target.y, target.w);
   }
+
+ 
 
 
   // Does not draw a border if this is not the target the user
@@ -221,11 +244,12 @@ function drawTarget(i)
   else {
     noStroke();
     fill(color(155,155,155));
+    circle(target.x, target.y, target.w);
   }          
 
   // Draws the target
   //fill(color(155,155,155));                 
-  circle(target.x, target.y, target.w);
+  
 }
 
 // Returns the location and size of a given target
