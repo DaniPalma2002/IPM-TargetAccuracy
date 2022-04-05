@@ -224,7 +224,7 @@ function drawTarget(i)
     fill(220,220,220);
     textSize(30);
     textAlign(CENTER);
-    text('2x', target.x, target.y);
+    text('2x', target.x, target.y + 5);
     textSize(18);
     
   }
