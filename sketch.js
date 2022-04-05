@@ -40,6 +40,13 @@ class Target
   }
 }
 
+var song;
+
+function preload() {
+  song = loadSound("button.mp3");
+}
+
+
 // Runs once at the start
 function setup()
 {
@@ -51,6 +58,7 @@ function setup()
   textFont("Arial", 18);     // font size for the majority of the text
   drawUserIDScreen();        // draws the user start-up screen (student ID and display size)
   
+  song.setVolume(0.3);
 }
 
 // Runs every frame and redraws the screen
@@ -160,7 +168,10 @@ function mousePressed()
       let virtual_x = map(mouseX, inputArea.x, inputArea.x + inputArea.w, 0, width)
       let virtual_y = map(mouseY, inputArea.y, inputArea.y + inputArea.h, 0, height)
 
-      if (dist(target.x, target.y, virtual_x, virtual_y) < target.w/2) hits++;
+      if (dist(target.x, target.y, virtual_x, virtual_y) < target.w/2) {
+        hits++;
+        song.play();
+      }
       else misses++;
       
       current_trial++;                 // Move on to the next trial/target
@@ -209,6 +220,7 @@ function drawTarget(i)
     circle(target.x, target.y, target.w);
 
     // see the colors
+    // TODO -  use TARGETSIZE form target
     fill(220,220,220);
     textSize(30);
     textAlign(CENTER);
