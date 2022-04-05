@@ -43,7 +43,7 @@ class Target
 var song;
 
 function preload() {
-  song = loadSound("button.mp3");
+  song = loadSound("osu.wav");
 }
 
 
@@ -131,7 +131,7 @@ function printAndSavePerformance()
         target_w_penalty:   target_w_penalty,
         fitts_IDs:          fitts_IDs,
         // !! REMOVE ON BAKEOFF DAY !!
-        version:            "1.4"
+        version:            "1.4.1"
   }
   
   // Send data to DB (DO NOT CHANGE!)
