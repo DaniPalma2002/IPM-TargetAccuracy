@@ -123,7 +123,7 @@ function printAndSavePerformance()
         target_w_penalty:   target_w_penalty,
         fitts_IDs:          fitts_IDs,
         // !! REMOVE ON BAKEOFF DAY !!
-        version:            "1.2"
+        version:            "1.3"
   }
   
   // Send data to DB (DO NOT CHANGE!)
@@ -190,7 +190,14 @@ function drawTarget(i)
 {
   // Get the location and size for target (i)
   let target = getTargetBounds(i);
+  //let nextTarget = getTargetBounds(i+1);
   
+  //line(target.x,target.y,nextTarget.x,nextTarget.y);
+  let nextTarget = getTargetBounds(trials[current_trial + 1]);
+  
+  //line(target.x,target.y,nextTarget.x,nextTarget.y);
+
+
   // next target is the same as the current
   if (trials[current_trial] === i && trials[current_trial + 1] === i) {
     
@@ -201,23 +208,26 @@ function drawTarget(i)
     strokeWeight(10);
     circle(target.x, target.y, target.w);
 
-    /*
+    // see the colors
     fill(220,220,220);
-    textSize(80);
+    textSize(30);
     textAlign(CENTER);
-    text('2', target.x, target.y);
+    text('2x', target.x, target.y);
     textSize(18);
-    */
+    
   }
 
   // Check whether this target is the target the user should be trying to select
   else if (trials[current_trial] === i) 
   { 
+    
     // Highlights the target the user should be trying to select
     // with a white border
     fill(color(0,200,0));
     stroke(color(0,220,0));
     strokeWeight(10);
+
+    line(target.x,target.y,nextTarget.x,nextTarget.y);
 
     circle(target.x, target.y, target.w);
     
@@ -230,6 +240,11 @@ function drawTarget(i)
   
   //! next target !!!
   else if (trials[current_trial + 1] === i) {
+
+    let nextTarget = getTargetBounds(trials[current_trial + 1]);
+  
+    line(target.x,target.y,nextTarget.x,nextTarget.y);
+
     fill(color(100,0,0));
     stroke(color(120,0,0));
     strokeWeight(5);
@@ -245,7 +260,9 @@ function drawTarget(i)
     noStroke();
     fill(color(155,155,155));
     circle(target.x, target.y, target.w);
-  }          
+  }
+
+
 
   // Draws the target
   //fill(color(155,155,155));                 
