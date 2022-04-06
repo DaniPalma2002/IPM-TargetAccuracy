@@ -153,7 +153,7 @@ function printAndSavePerformance()
     if (fitts_IDs[j] == -1)
       text("Target " + (j+2) + ": MISSED", (2*width)/3, 280 + 20*i);
     else
-      text("Target " + (j+2) + ": " + fitts_IDs[j], (3*width)/5, 280 + 20*i);
+      text("Target " + (j+2) + ": " + fitts_IDs[j], (2*width)/3, 280 + 20*i);
     i++;
   }
   
