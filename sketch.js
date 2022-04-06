@@ -28,6 +28,7 @@ let current_trial    = 0;      // the current trial number (indexes into trials 
 let attempt          = 0;      // users complete each test twice to account for practice (attemps 0 and 1)
 let fitts_IDs        = [];     // add the Fitts ID for each selection here (-1 when there is a miss)
 
+var strokeColor = 200;
 
 // Target class (position and width)
 class Target
@@ -59,6 +60,7 @@ function setup()
   drawUserIDScreen();        // draws the user start-up screen (student ID and display size)
   
   song.setVolume(0.3);
+
 }
 
 // Runs every frame and redraws the screen
@@ -86,7 +88,24 @@ function draw()
 
     fill(color(255,255,255));
     circle(x, y, 0.5 * PPCM);
+
+
+
+    // change color of target while hovering
+    let target = getTargetBounds(trials[current_trial]);
+
+    if (insideInputArea(mouseX, mouseY))
+    {
+      let virtual_x = map(mouseX, inputArea.x, inputArea.x + inputArea.w, 0, width)
+      let virtual_y = map(mouseY, inputArea.y, inputArea.y + inputArea.h, 0, height)
+
+      if (dist(target.x, target.y, virtual_x, virtual_y) < target.w/2) {
+        strokeColor = 255;
+      }
+      else strokeColor = 200;
+    }
   }
+  
 }
 
 // Print and save results at the end of 54 trials
@@ -113,6 +132,7 @@ function printAndSavePerformance()
   text("Average time per target: " + time_per_target + "s", width/2, 180);
   text("Average time for each target (+ penalty): " + target_w_penalty + "s", width/2, 220);
   
+  // TODO - fitts IDS
   // Print Fitts IDS (one per target, -1 if failed selection, optional)
   // 
 
@@ -131,7 +151,7 @@ function printAndSavePerformance()
         target_w_penalty:   target_w_penalty,
         fitts_IDs:          fitts_IDs,
         // !! REMOVE ON BAKEOFF DAY !!
-        version:            "1.4.1"
+        version:            "1.5"
   }
   
   // Send data to DB (DO NOT CHANGE!)
@@ -237,13 +257,14 @@ function drawTarget(i)
     
     // Highlights the target the user should be trying to select
     // with a white border
-    fill(color(0,200,0));
-    stroke(color(0,220,0));
+    fill(color(0,150,0));
+    stroke(color(0,strokeColor,0));
     strokeWeight(10);
 
     line(target.x,target.y,nextTarget.x,nextTarget.y);
 
     circle(target.x, target.y, target.w);
+    
     
     // Remember you are allowed to access targets (i-1) and (i+1)
     // if this is the target the user should be trying to select
