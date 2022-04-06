@@ -214,7 +214,8 @@ function mousePressed()
       if (dist(target.x, target.y, virtual_x, virtual_y) < target.w/2) {
         hits++;
         song.play();
-
+        
+        // fitts ID
         if (prevClick_x != -1 && prevClick_y != -1) {
           let x = Math.log2((dist(prevClick_x, prevClick_y, target.x, target.y)/target.w) + 1).toFixed(3);
           fitts_IDs.push(x);
