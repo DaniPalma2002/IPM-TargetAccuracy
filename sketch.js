@@ -177,7 +177,7 @@ function printAndSavePerformance()
         target_w_penalty:   target_w_penalty,
         fitts_IDs:          fitts_IDs,
         // !! REMOVE ON BAKEOFF DAY !!
-        version:            "1.5"
+        version:            "1.6"
   }
   
   // Send data to DB (DO NOT CHANGE!)
