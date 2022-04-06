@@ -30,3 +30,5 @@ improve human target accuracy
 - podemos limitar até onde o rato pode ir? (exemplo não passar dos alvos das extremidades
 - qual é o limite do tamanho da borda dos alvos?
 
+## TODO
+- colocar fitts ID nas outras versões
