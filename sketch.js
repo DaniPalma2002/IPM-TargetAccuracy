@@ -29,6 +29,7 @@ let attempt          = 0;      // users complete each test twice to account for 
 let fitts_IDs        = [];     // add the Fitts ID for each selection here (-1 when there is a miss)
 
 var strokeColor = 200;
+var fillColor = 150;
 
 // previous clicks (for fitts ID)
 let prevClick_x = -1
@@ -105,8 +106,12 @@ function draw()
 
       if (dist(target.x, target.y, virtual_x, virtual_y) < target.w/2) {
         strokeColor = 255;
+        fillColor = 255;
       }
-      else strokeColor = 200;
+      else {
+        strokeColor = 200;
+        fillColor = 150;
+      }
     }
   }
   
@@ -263,6 +268,8 @@ function drawTarget(i)
   
   //line(target.x,target.y,nextTarget.x,nextTarget.y);
   let nextTarget = getTargetBounds(trials[current_trial + 1]);
+  let prevTarget = getTargetBounds(trials[current_trial - 1]);
+
   
   //line(target.x,target.y,nextTarget.x,nextTarget.y);
 
@@ -278,7 +285,6 @@ function drawTarget(i)
     circle(target.x, target.y, target.w);
 
     // see the colors
-    // TODO -  use TARGETSIZE form target
     fill(220,220,220);
     textSize(30);
     textAlign(CENTER);
@@ -292,14 +298,21 @@ function drawTarget(i)
   { 
     
     // Highlights the target the user should be trying to select
-    // with a white border
-    fill(color(0,150,0));
+    // with a white border 150
+    fill(color(0,fillColor,0));
     stroke(color(0,strokeColor,0));
     strokeWeight(10);
 
-    line(target.x,target.y,nextTarget.x,nextTarget.y);
-
     circle(target.x, target.y, target.w);
+
+    line(target.x,target.y,nextTarget.x,nextTarget.y);
+    //noStroke();
+    stroke(150);
+    strokeWeight(3);
+    line(target.x,target.y,prevTarget.x,prevTarget.y);
+    
+
+    
     
     
     // Remember you are allowed to access targets (i-1) and (i+1)
@@ -307,22 +320,15 @@ function drawTarget(i)
     //
   }
 
-  
-  
+
   //! next target !!!
   else if (trials[current_trial + 1] === i) {
-
-    let nextTarget = getTargetBounds(trials[current_trial + 1]);
-  
-    line(target.x,target.y,nextTarget.x,nextTarget.y);
 
     fill(color(100,0,0));
     stroke(color(120,0,0));
     strokeWeight(5);
     circle(target.x, target.y, target.w);
   }
-
- 
 
 
   // Does not draw a border if this is not the target the user
