@@ -30,6 +30,10 @@ let fitts_IDs        = [];     // add the Fitts ID for each selection here (-1 w
 
 var strokeColor = 200;
 
+// previous clicks (for fitts ID)
+let prevClick_x = -1
+let prevClick_y = -1
+
 // Target class (position and width)
 class Target
 {
@@ -111,6 +115,7 @@ function draw()
 // Print and save results at the end of 54 trials
 function printAndSavePerformance()
 {
+  strokeWeight(0);
   // DO NOT CHANGE THESE! 
   let accuracy			= parseFloat(hits * 100) / parseFloat(hits + misses);
   let test_time         = (testEndTime - testStartTime) / 1000;
@@ -132,10 +137,26 @@ function printAndSavePerformance()
   text("Average time per target: " + time_per_target + "s", width/2, 180);
   text("Average time for each target (+ penalty): " + target_w_penalty + "s", width/2, 220);
   
-  // TODO - fitts IDS
+  // TODO - CLEAN THIS
   // Print Fitts IDS (one per target, -1 if failed selection, optional)
-  // 
-
+  text("Fitts Index of Performance", width/2, 260);
+  textAlign(LEFT);
+  text("Target 1: ---", width/4, 280);
+  for (var i = 0; i < 26; i++) {
+    if (fitts_IDs[i] == -1)
+      text("Target " + (i+2) + ": MISSED", width/4, 300 + 20*i);
+    else
+      text("Target " + (i+2) + ": " + fitts_IDs[i], width/4, 300 + 20*i);
+  }
+  i = 0;
+  for (var j = 26; j < 53; j++) {
+    if (fitts_IDs[j] == -1)
+      text("Target " + (j+2) + ": MISSED", (2*width)/3, 280 + 20*i);
+    else
+      text("Target " + (j+2) + ": " + fitts_IDs[j], (3*width)/5, 280 + 20*i);
+    i++;
+  }
+  
   // Saves results (DO NOT CHANGE!)
   let attempt_data = 
   {
@@ -170,6 +191,8 @@ function printAndSavePerformance()
   }
 }
 
+
+
 // Mouse button was pressed - lets test to see if hit was in the correct target
 function mousePressed() 
 {
@@ -191,9 +214,21 @@ function mousePressed()
       if (dist(target.x, target.y, virtual_x, virtual_y) < target.w/2) {
         hits++;
         song.play();
+
+        if (prevClick_x != -1 && prevClick_y != -1) {
+          let x = Math.log2((dist(prevClick_x, prevClick_y, target.x, target.y)/target.w) + 1).toFixed(3);
+          fitts_IDs.push(x);
+        }
+        
       }
-      else misses++;
-      
+      else {
+        misses++;
+        fitts_IDs.push(-1);
+      }
+      //stores clicks
+      prevClick_x = virtual_x;
+      prevClick_y = virtual_y;
+
       current_trial++;                 // Move on to the next trial/target
     }
 
