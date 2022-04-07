@@ -15,6 +15,7 @@ improve human target accuracy
 - 1.4 -> https://editor.p5js.org/DaniPalma2002/full/T8G1IoT2R (sound)
   - 1.4.1 -> https://editor.p5js.org/DaniPalma2002/full/OB6tYJlrN (osu)
 - 1.5 -> https://editor.p5js.org/DaniPalma2002/full/_bBorwDVQ (hover)
+  - 1.5.1 -> https://editor.p5js.org/DaniPalma2002/full/hxjwNxCwS (other hover)
 - 1.6 -> https://editor.p5js.org/DaniPalma2002/full/Zn65-ismF (show line to prev target)
 
 
