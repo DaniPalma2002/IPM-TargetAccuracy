@@ -29,6 +29,7 @@ improve human target accuracy
 - o que é considerado snapping??
 - podemos limitar até onde o rato pode ir? (exemplo não passar dos alvos das extremidades
 - qual é o limite do tamanho da borda dos alvos?
+- podemos, se acertarmos todos os alvos, os ultimos 2 serem automaticamente rapidamente falhados (2 alvos errados não dá penalidade)
 
 ## TODO
 - colocar fitts ID nas outras versões
