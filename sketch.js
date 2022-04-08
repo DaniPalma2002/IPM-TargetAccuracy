@@ -50,6 +50,7 @@ var song;
 
 function preload() {
   song = loadSound("osu.wav");
+  soundImage = loadImage("iconSound.png");
 }
 
 
@@ -412,6 +413,9 @@ function drawInputArea()
   noFill();
   stroke(color(220,220,220));
   strokeWeight(2);
+
+  
   
   rect(inputArea.x, inputArea.y, inputArea.w, inputArea.h);
+  console.log("input area: " + inputArea.x + inputArea.y);
 }
