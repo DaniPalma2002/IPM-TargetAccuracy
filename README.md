@@ -21,7 +21,7 @@ improve human target accuracy
 
 ## IDEIAS
 - mover na grelha (estar sempre dentro dos alvos)
-- ~~adicionar a linha do atual para o anterior
+- ~~adicionar a linha do atual para o anterior~ 
 - ~~mudar alguma coisa do alvo pretendido quando fazemos hovering (mudar a cor, alterar a dimensão do stroke, cor do cursor, etc.)~~
 
 
