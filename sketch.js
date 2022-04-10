@@ -28,12 +28,17 @@ let current_trial    = 0;      // the current trial number (indexes into trials 
 let attempt          = 0;      // users complete each test twice to account for practice (attemps 0 and 1)
 let fitts_IDs        = [];     // add the Fitts ID for each selection here (-1 when there is a miss)
 
-var strokeColor = 200;
-var fillColor = 150;
+let strokeColor = 200;
+let fillColor = 150;
 
 // previous clicks (for fitts ID)
 let prevClick_x = -1
 let prevClick_y = -1
+
+
+// snap cursor
+let snapX;
+let snapY;
 
 // Target class (position and width)
 class Target
@@ -46,7 +51,8 @@ class Target
   }
 }
 
-var song;
+let song;
+let soundImage;
 
 function preload() {
   song = loadSound("osu.wav");
@@ -88,12 +94,26 @@ function draw()
     // Draw the user input area
     drawInputArea()
 
+
+    //let snapMouse = getTargetBounds(getClosestTarget(mouseX, mouseY));
+
+
     // Draw the virtual cursor
-    let x = map(mouseX, inputArea.x, inputArea.x + inputArea.w, 0, width)
-    let y = map(mouseY, inputArea.y, inputArea.y + inputArea.h, 0, height)
+    let x = map(mouseX, inputArea.x, inputArea.x + inputArea.w, 0, width);
+    let y = map(mouseY, inputArea.y, inputArea.y + inputArea.h, 0, height);
+
+    
+    let snapMouse = getClosestTarget(x, y);/*
+    let snapX = getTargetBounds(snapMouse).x;
+    */
+    
+    snapX = getTargetBounds(snapMouse).x;
+    snapY = getTargetBounds(snapMouse).y;
+
+    //console.log(snapX);
 
     fill(color(255,255,255));
-    circle(x, y, 0.5 * PPCM);
+    circle(snapX, snapY, 0.5 * PPCM);
 
 
 
@@ -102,10 +122,16 @@ function draw()
 
     if (insideInputArea(mouseX, mouseY))
     {
-      let virtual_x = map(mouseX, inputArea.x, inputArea.x + inputArea.w, 0, width)
-      let virtual_y = map(mouseY, inputArea.y, inputArea.y + inputArea.h, 0, height)
+      //let virtual_x = map(mouseX, inputArea.x, inputArea.x + inputArea.w, 0, width)
+      //let virtual_y = map(mouseY, inputArea.y, inputArea.y + inputArea.h, 0, height)
+      
+      //console.log("mouseX:"+mouseX);
+      //console.log("snapX:"+snapX);
+      
 
-      if (dist(target.x, target.y, virtual_x, virtual_y) < target.w/2) {
+      //console.log(dist(target.x, target.y, virtual_x, virtual_y));
+
+      if (dist(target.x, target.y, snapX, snapY) < target.w/2) {
         strokeColor = 255;
         fillColor = 255;
       }
@@ -143,7 +169,7 @@ function printAndSavePerformance()
   text("Average time per target: " + time_per_target + "s", width/2, 180);
   text("Average time for each target (+ penalty): " + target_w_penalty + "s", width/2, 220);
   
-  // TODO - CLEAN THIS
+  // TODO - CLEAN THIS !!!!
   // Print Fitts IDS (one per target, -1 if failed selection, optional)
   text("Fitts Index of Performance", width/2, 260);
   textAlign(LEFT);
@@ -178,7 +204,7 @@ function printAndSavePerformance()
         target_w_penalty:   target_w_penalty,
         fitts_IDs:          fitts_IDs,
         // !! REMOVE ON BAKEOFF DAY !!
-        version:            "1.6"
+        version:            "2"
   }
   
   // Send data to DB (DO NOT CHANGE!)
@@ -217,7 +243,7 @@ function mousePressed()
       let virtual_x = map(mouseX, inputArea.x, inputArea.x + inputArea.w, 0, width)
       let virtual_y = map(mouseY, inputArea.y, inputArea.y + inputArea.h, 0, height)
 
-      if (dist(target.x, target.y, virtual_x, virtual_y) < target.w/2) {
+      if (dist(target.x, target.y, snapX, snapY) < target.w/2) {
         hits++;
         song.play();
         
@@ -232,7 +258,8 @@ function mousePressed()
         misses++;
         fitts_IDs.push(-1);
       }
-      //stores clicks
+      //stores clicks 
+      // TODO see fitts
       prevClick_x = virtual_x;
       prevClick_y = virtual_y;
 
@@ -310,7 +337,7 @@ function drawTarget(i)
     //noStroke();
     stroke(150);
     strokeWeight(3);
-    line(target.x,target.y,prevTarget.x,prevTarget.y);
+    //line(target.x,target.y,prevTarget.x,prevTarget.y);
     
 
     
@@ -329,6 +356,7 @@ function drawTarget(i)
     stroke(color(120,0,0));
     strokeWeight(5);
     circle(target.x, target.y, target.w);
+    noStroke();
   }
 
 
@@ -340,7 +368,15 @@ function drawTarget(i)
     circle(target.x, target.y, target.w);
   }
 
-
+  // input box targets
+  let inputTargetX = map(target.x, 0, width, inputArea.x, inputArea.x + inputArea.w);
+  let inputTargetY = map(target.y, 0, height, inputArea.y, inputArea.y + inputArea.h);  
+  
+  
+  //circle(inputTargetX, inputTargetY, (target.w)*(inputArea.y/height));
+  rectMode(CENTER);
+  square(inputTargetX, inputTargetY, target.w * (inputArea.w/height));
+  rectMode(CORNER);
 
   // Draws the target
   //fill(color(155,155,155));                 
@@ -417,5 +453,29 @@ function drawInputArea()
   
   
   rect(inputArea.x, inputArea.y, inputArea.w, inputArea.h);
-  console.log("input area: " + inputArea.x + inputArea.y);
+  //console.log("input area: " + inputArea.x + inputArea.y);
+}
+
+
+// Get the target closest to the mouse
+function getClosestTarget(x, y) {
+
+  let res = 0;
+  let distance = 5000; 
+  let temp = 0;
+
+  for (var i = 0; i < 18; i++) {
+    temp = getDistanceToTarget(x, y, i);
+    if (temp < distance) {
+      res = i;
+      distance = temp;
+    }
+    
+  }
+  return res;
+}
+
+function getDistanceToTarget(x, y, i) {
+  target = getTargetBounds(i);
+  return dist(x, y, target.x, target.y);
 }
