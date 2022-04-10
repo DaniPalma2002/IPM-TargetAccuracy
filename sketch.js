@@ -335,9 +335,10 @@ function drawTarget(i)
 
     line(target.x,target.y,nextTarget.x,nextTarget.y);
     //noStroke();
-    stroke(150);
+    fill(color(0, fillColor, 0));
+    //stroke(150);
     strokeWeight(3);
-    //line(target.x,target.y,prevTarget.x,prevTarget.y);
+    
     
 
     
