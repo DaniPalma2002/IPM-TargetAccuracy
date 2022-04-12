@@ -240,8 +240,8 @@ function mousePressed()
         
     if (insideInputArea(mouseX, mouseY))
     {
-      let virtual_x = map(mouseX, inputArea.x, inputArea.x + inputArea.w, 0, width)
-      let virtual_y = map(mouseY, inputArea.y, inputArea.y + inputArea.h, 0, height)
+      //let virtual_x = map(mouseX, inputArea.x, inputArea.x + inputArea.w, 0, width)
+      //let virtual_y = map(mouseY, inputArea.y, inputArea.y + inputArea.h, 0, height)
 
       if (dist(target.x, target.y, snapX, snapY) < target.w/2) {
         hits++;
@@ -260,8 +260,8 @@ function mousePressed()
       }
       //stores clicks 
       // TODO see fitts
-      prevClick_x = virtual_x;
-      prevClick_y = virtual_y;
+      prevClick_x = snapX;
+      prevClick_y = snapY;
 
       current_trial++;                 // Move on to the next trial/target
     }
