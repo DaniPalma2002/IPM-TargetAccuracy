@@ -35,3 +35,4 @@ improve human target accuracy
 
 ## TODO
 - colocar fitts ID nas outras versões
+- ver fitts ID
