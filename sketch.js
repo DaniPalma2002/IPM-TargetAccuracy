@@ -57,6 +57,9 @@ let soundImage;
 function preload() {
   song = loadSound("osu.wav");
   soundImage = loadImage("iconSound.png");
+  current_target = loadImage("alvo_atual.png");
+  next_target = loadImage("alvo_seguinte.png");
+  x2_target = loadImage("alvo_x2.png");
 }
 
 
@@ -78,6 +81,7 @@ function setup()
 // Runs every frame and redraws the screen
 function draw()
 {
+  
   if (draw_targets)
   {     
     // The user is interacting with the 6x3 target grid
@@ -87,6 +91,18 @@ function draw()
     fill(color(255,255,255));
     textAlign(LEFT);
     text("Trial " + (current_trial + 1) + " of " + trials.length, 50, 20);
+
+    //Caption
+    text("Legenda: ", 750, 50);
+
+    image(current_target, 750, 70);
+    text("Alvo atual ", 850, 100);
+    
+    image(x2_target, 750, 170);
+    text("Carregar duas vezes no alvo ", 850, 200);
+
+    image(next_target, 750, 270);
+    text("Alvo seguinte ", 850, 300);
     
     // Draw all 18 targets
 	for (var i = 0; i < 18; i++) drawTarget(i);
