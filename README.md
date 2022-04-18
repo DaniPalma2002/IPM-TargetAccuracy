@@ -18,7 +18,7 @@ improve human target accuracy
   - 1.5.1 -> https://editor.p5js.org/DaniPalma2002/full/hxjwNxCwS (other hover)
 - 1.6 -> https://editor.p5js.org/DaniPalma2002/full/Zn65-ismF (show line to prev target)
 - 2 -> https://editor.p5js.org/DaniPalma2002/full/E3QZoRtML (snapping)
-
+  - 2.1 -> https://editor.p5js.org/DaniPalma2002/full/q_NkubabK (error sound)
 
 ## IDEIAS
 - mover na grelha (estar sempre dentro dos alvos)
