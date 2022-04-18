@@ -56,6 +56,7 @@ let soundImage;
 
 function preload() {
   song = loadSound("osu.wav");
+  error_sound = loadSound("error.wav")
   soundImage = loadImage("iconSound.png");
   current_target = loadImage("alvo_atual.png");
   next_target = loadImage("alvo_seguinte.png");
@@ -74,7 +75,9 @@ function setup()
   textFont("Arial", 18);     // font size for the majority of the text
   drawUserIDScreen();        // draws the user start-up screen (student ID and display size)
   
+  // sound volume
   song.setVolume(0.3);
+  error_sound.setVolume(0.05);
 
 }
 
@@ -92,17 +95,23 @@ function draw()
     textAlign(LEFT);
     text("Trial " + (current_trial + 1) + " of " + trials.length, 50, 20);
 
+
+
     //Caption
-    text("Legenda: ", 750, 50);
+    text("Legenda: ", inputArea.x, 50);
 
-    image(current_target, 750, 70);
-    text("Alvo atual ", 850, 100);
+    image(current_target, inputArea.x, 70);
+    text("Alvo atual ", inputArea.x + 80, 100);
     
-    image(x2_target, 750, 170);
-    text("Carregar duas vezes no alvo ", 850, 200);
+    image(x2_target, inputArea.x, 170);
+    text("Carregar duas vezes no alvo ", inputArea.x + 80, 200);
 
-    image(next_target, 750, 270);
-    text("Alvo seguinte ", 850, 300);
+    image(next_target, inputArea.x, 270);
+    text("Alvo seguinte ", inputArea.x + 80, 300);
+
+
+
+
     
     // Draw all 18 targets
 	for (var i = 0; i < 18; i++) drawTarget(i);
@@ -111,22 +120,17 @@ function draw()
     drawInputArea()
 
 
-    //let snapMouse = getTargetBounds(getClosestTarget(mouseX, mouseY));
-
 
     // Draw the virtual cursor
     let x = map(mouseX, inputArea.x, inputArea.x + inputArea.w, 0, width);
     let y = map(mouseY, inputArea.y, inputArea.y + inputArea.h, 0, height);
 
     
-    let snapMouse = getClosestTarget(x, y);/*
-    let snapX = getTargetBounds(snapMouse).x;
-    */
+    let snapMouse = getClosestTarget(x, y);
     
     snapX = getTargetBounds(snapMouse).x;
     snapY = getTargetBounds(snapMouse).y;
 
-    //console.log(snapX);
 
     fill(color(255,255,255));
     circle(snapX, snapY, 0.5 * PPCM);
@@ -138,14 +142,7 @@ function draw()
 
     if (insideInputArea(mouseX, mouseY))
     {
-      //let virtual_x = map(mouseX, inputArea.x, inputArea.x + inputArea.w, 0, width)
-      //let virtual_y = map(mouseY, inputArea.y, inputArea.y + inputArea.h, 0, height)
       
-      //console.log("mouseX:"+mouseX);
-      //console.log("snapX:"+snapX);
-      
-
-      //console.log(dist(target.x, target.y, virtual_x, virtual_y));
 
       if (dist(target.x, target.y, snapX, snapY) < target.w/2) {
         strokeColor = 255;
@@ -220,7 +217,7 @@ function printAndSavePerformance()
         target_w_penalty:   target_w_penalty,
         fitts_IDs:          fitts_IDs,
         // !! REMOVE ON BAKEOFF DAY !!
-        version:            "2"
+        version:            "2.1"
   }
   
   // Send data to DB (DO NOT CHANGE!)
@@ -272,6 +269,7 @@ function mousePressed()
       }
       else {
         misses++;
+        error_sound.play();
         fitts_IDs.push(-1);
       }
       //stores clicks 
