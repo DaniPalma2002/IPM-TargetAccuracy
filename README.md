@@ -6,6 +6,7 @@ improve human target accuracy
 - Não alterar ```ppi.js```
 
 - REMOVER VERSÃO NO DIA DO BAKEOFF
+- COLOCAR O FIREBASE ORIGINAL
 
 
 ## Links para cada versões
@@ -19,20 +20,3 @@ improve human target accuracy
 - 1.6 -> https://editor.p5js.org/DaniPalma2002/full/Zn65-ismF (show line to prev target)
 - 2 -> https://editor.p5js.org/DaniPalma2002/full/E3QZoRtML (snapping)
   - 2.1 -> https://editor.p5js.org/DaniPalma2002/full/q_NkubabK (error sound)
-
-## IDEIAS
-- mover na grelha (estar sempre dentro dos alvos)
-- ~~adicionar a linha do atual para o anterior~~
-- ~~mudar alguma coisa do alvo pretendido quando fazemos hovering (mudar a cor, alterar a dimensão do stroke, cor do cursor, etc.)~~
-
-
-
-## PERGUNTAS
-- o que é considerado snapping??
-- podemos limitar até onde o rato pode ir? (exemplo não passar dos alvos das extremidades
-- qual é o limite do tamanho da borda dos alvos?
-- podemos, se acertarmos todos os alvos, os ultimos 2 serem automaticamente rapidamente falhados (2 alvos errados não dá penalidade)
-
-## TODO
-- colocar fitts ID nas outras versões
-- ver fitts ID
