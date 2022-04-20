@@ -182,7 +182,6 @@ function printAndSavePerformance()
   text("Average time per target: " + time_per_target + "s", width/2, 180);
   text("Average time for each target (+ penalty): " + target_w_penalty + "s", width/2, 220);
   
-  // TODO - CLEAN THIS !!!!
   // Print Fitts IDS (one per target, -1 if failed selection, optional)
   text("Fitts Index of Performance", width/2, 260);
   textAlign(LEFT);
@@ -273,7 +272,6 @@ function mousePressed()
         fitts_IDs.push(-1);
       }
       //stores clicks 
-      // TODO see fitts
       prevClick_x = snapX;
       prevClick_y = snapY;
 

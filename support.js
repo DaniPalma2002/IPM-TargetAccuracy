@@ -40,7 +40,9 @@ function drawUserIDScreen()
   start_button.position(width/2 - start_button.size().width/2, height/2 - start_button.size().height/2);
 
   // sound instruction 
-  image(soundImage, width -100 , height-100 );
+  image(soundImage, width - 100 , height - 100);
+  fill(255);
+  text("Sound On", width - 110 , height - 110);
 }
 
 // Verifies if the student ID is a number, and within an acceptable range
