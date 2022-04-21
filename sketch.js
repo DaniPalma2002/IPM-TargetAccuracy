@@ -5,7 +5,7 @@
 // p5.js reference: https://p5js.org/reference/
 
 // Database (CHANGE THESE!)
-const GROUP_NUMBER   = 61;      // Add your group number here as an integer (e.g., 2, 3)
+const GROUP_NUMBER   = "61-AL";      // Add your group number here as an integer (e.g., 2, 3)
 const BAKE_OFF_DAY   = true;  // Set to 'true' before sharing during the bake-off day
 
 // Target and grid properties (DO NOT CHANGE!)
@@ -216,7 +216,7 @@ function printAndSavePerformance()
         target_w_penalty:   target_w_penalty,
         fitts_IDs:          fitts_IDs,
         // !! REMOVE ON BAKEOFF DAY !!
-        version:            "2.1"
+        //version:            "2.1"
   }
   
   // Send data to DB (DO NOT CHANGE!)
