@@ -109,6 +109,8 @@ function draw()
     image(next_target, inputArea.x, 270);
     text("Alvo seguinte ", inputArea.x + 80, 300);
 
+    text("Recomendo fazerem pelos alvos da caixa de input",inputArea.x, 400);
+
 
 
 
